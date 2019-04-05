@@ -1,12 +1,12 @@
 $(document).ready(function(){
 	$('.home-login').click(function(){
-		$('.home-camera-overlay,').fadeIn(function(){
+		$('.home-camera-overlay').fadeIn(function(){
 			Webcam.attach( '.home-camera' );
 			$('.home-login-error').text('').fadeOut();
 		});
 	});
 	$('.home-register').click(function(){
-		window.location.href = 'C:/Users/vijay/Desktop/CPCP/cpcp_registration.html';
+		window.location.href = 'C:/Users/vijay/Desktop/New folder/cpcp/cpcp_registration.html';
 	});
 	
 	Webcam.on( 'live', function() {

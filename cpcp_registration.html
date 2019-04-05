@@ -11,21 +11,31 @@
 <script src="js/semantic.min.js"></script> 
 <script src="js/aws-sdk-2.16.0.min.js"></script>
 <script src="js/webcam.min.js"></script>
-<script src="js/cpcp.js"></script>
+<script src="js/cpcp_registration.js"></script>
 </head>
 
 <body class="body-container">
 <div class="home-header">Chandigarh Police Crime Portal</div>
-<div class="home-logo">
-	<img src="assets/cpcp_logo.jpg">
+<div class="ui input">
+  <input id='reg-name' type="text" placeholder="Please enter your name">
 </div>
-<div>
-	<button class="ui brown button home-login">Log In</button>
-	<button class="ui brown button home-register">Register</button>
+<img class="reg-photo"></img>
+<button class="ui brown button reg-upload-photo">
+  Upload Photo
+</button>
+<div class="reg-register-btn">
+	<button class="ui brown button reg-register-btn">
+	  Register
+	</button>
 </div>
+<div class="home-login-error"></div>
 <div class="home-camera-overlay">
-	<div class="home-camera-cntr"><div class="home-camera" style="width:680px; height:480px;"></div></div>
-	<div id="my_result"></div>
+	<div class="home-camera-cntr">
+		<div class="home-camera" style="width:680px; height:480px;"></div>
+		<div class="reg-click-photo">
+			<button class="ui brown button">Click Photo</button>
+		</div>
+	</div>
 </div>
 </body>
 

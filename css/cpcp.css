@@ -41,9 +41,13 @@
     justify-content: center;
     align-items: center;
 	height: 100%;
+	flex-direction: column;
 }
 .home-login-error{
 	display:none;
 	color: red;
     margin-top: 20px;
+}
+.home-login-error.success{
+	color: green;
 }

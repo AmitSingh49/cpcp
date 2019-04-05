@@ -1,0 +1,19 @@
+#reg-name{
+	height: 50px;
+    margin-top: 50px;
+}
+.reg-photo{
+	margin-top: 20px;
+	width:400px; 
+	display:none;
+}
+.reg-upload-photo{
+	margin-top: 20px !important;
+}
+.reg-click-photo{
+	display:none;
+}
+.reg-register-btn{
+	margin-top: 20px !important;
+	display:none;
+}
