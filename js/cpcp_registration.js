@@ -76,37 +76,55 @@ $(document).ready(function(){
 		}};
 		
 		var CollectionParams= {
-				CollectionId: "test_recognition",
-				FaceMatchThreshold:95,
-				Image:{
+			CollectionId: "test_recognition",
+			FaceMatchThreshold:95,
+			Image:{
+			Bytes: imageBytes,
+			},
+			MaxFaces:5
+		};
+		
+		var noOfHumansParams= {
+			Image:{
 				Bytes: imageBytes,
-				},
-				MaxFaces:5
-			};
+			}
+		};
 			
-			rekognition.searchFacesByImage(CollectionParams, function (err, dataLogin) {
+		rekognition.detectFaces(noOfHumansParams, function (err, data) {
 				if (err){
-					console.log(err, err.stack);
-					$('.home-login-error').text(err.message).fadeIn();	
+					$('.home-camera-overlay').fadeOut();
+					$('.home-login-error').text(err.message).fadeIn();
 				} 
-				else{
-					if(dataLogin.FaceMatches.length > 0){
-						$('.home-login-error').text("You are already registered").fadeIn();
-					}
-					else{
-						rekognition.indexFaces(params, function (err, data) {
-							if (err){
-								$('.home-login-error').text(err.message).removeClass('success').fadeIn();
-							} 
-							else{
-								$('.home-login-error').text('User Registered Successfully').addClass('success').fadeIn();
-								$('.reg-register-btn').fadeOut();
-							}
-						});	
-					}
+				else if (data.FaceDetails.length > 1){
+					$('.home-camera-overlay').fadeOut();
+					$('.home-login-error').text("Please try with only one person in front of camera").fadeIn();
 				}
-			});
-		}
+				else{
+					rekognition.searchFacesByImage(CollectionParams, function (err, dataLogin) {
+						if (err){
+							console.log(err, err.stack);
+							$('.home-login-error').text(err.message).fadeIn();	
+						} 
+						else{
+							if(dataLogin.FaceMatches.length > 0){
+								$('.home-login-error').text("You are already registered").fadeIn();
+							}
+							else{
+								rekognition.indexFaces(params, function (err, data) {
+									if (err){
+										$('.home-login-error').text(err.message).removeClass('success').fadeIn();
+									} 
+									else{
+										$('.home-login-error').text('User Registered Successfully').addClass('success').fadeIn();
+										$('.reg-register-btn').fadeOut();
+									}
+								});	
+							}
+						}
+					});
+				}
+			});		
+	}
 
 	function AnonLog() {
     // Configure the credentials provider to use your identity pool
