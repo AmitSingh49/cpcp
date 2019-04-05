@@ -1,17 +1,18 @@
 $(document).ready(function(){
-	
 	$('.home-login').click(function(){
-		$('.home-camera-overlay').fadeIn(function(){
+		$('.home-camera-overlay,').fadeIn(function(){
 			Webcam.attach( '.home-camera' );
+			$('.home-login-error').text('').fadeOut();
 		});
+	});
+	$('.home-register').click(function(){
+		window.location.href = 'C:/Users/vijay/Desktop/CPCP/cpcp_registration.html';
 	});
 	
 	Webcam.on( 'live', function() {
 		AnonLog();
 		Webcam.snap( function(data_uri){
 			var image = null;
-			var img = document.createElement('img');
-			img.src = data_uri;
 			var jpg = true;
 			try {
 			  image = atob(data_uri.split("data:image/jpeg;base64,")[1]);
@@ -29,35 +30,56 @@ $(document).ready(function(){
 				}
 			}
 			var length = data_uri.length;
-			imageBytes = new ArrayBuffer(length);
+			var imageBytes = new ArrayBuffer(length);
 			var ua = new Uint8Array(imageBytes);
 			for (var i = 0; i < length; i++) {
 				ua[i] = image.charCodeAt(i);
 			}
-
-			var params= {
+			
+			var noOfHumansParams= {
+				Image:{
+					Bytes: imageBytes,
+				}
+			};
+			var CollectionParams= {
 				CollectionId: "test_recognition",
 				FaceMatchThreshold:95,
 				Image:{
 				Bytes: imageBytes,
 				},
-				MaxFaces:1
+				MaxFaces:5
 			};
 			AWS.region = "us-east-1";
 			var rekognition = new AWS.Rekognition();
-			rekognition.searchFacesByImage(params, function (err, data) {
+			
+			rekognition.detectFaces(noOfHumansParams, function (err, data) {
 				if (err){
-					console.log(err, err.stack);// an error occurred
+					$('.home-camera-overlay').fadeOut();
+					
+					$('.home-login-error').text(err.message).fadeIn();
 				} 
-				else{
-					if(data.FaceMatches[0] == undefined){
-						console.log("not found");
-					}
-					else{
-						alert(data.FaceMatches[0].Face.ExternalImageId);
-					}
+				else if (data.FaceDetails.length > 1){
+					$('.home-camera-overlay').fadeOut();
+					$('.home-login-error').text("Please try with only one person in front of camera").fadeIn();
 				}
-			});
+				else{
+					rekognition.searchFacesByImage(CollectionParams, function (err, dataLogin) {
+						if (err){
+							console.log(err, err.stack);
+							$('.home-login-error').text(err.message).fadeIn();	
+						} 
+						else{
+							if(dataLogin.FaceMatches.length === 1){
+								window.location.href = 'C:/Users/vijay/Desktop/CPCP/cpcp_landing.html';
+							}
+							else{
+								$('.home-camera-overlay').fadeOut();
+								$('.home-login-error').text("You don't have permission to login the system").fadeIn();
+							}
+						}
+					});
+				}
+			});	
 		});
 	});
 
