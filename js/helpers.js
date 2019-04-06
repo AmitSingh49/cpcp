@@ -65,3 +65,17 @@ function AnonLog() {
         var sessionToken = AWS.config.credentials.sessionToken;
     });
 }
+
+//change to match
+function AddToLocalStorage(criminalData) {
+    var criminalRecord = { name: "DEV", faceId: "123", email: 'c@c.com' };
+    //obj = JSON.parse(text);
+    localStorage.setItem(criminalRecord.faceId, JSON.stringify(criminalRecord));
+}
+
+//change to match
+function DeleteToLocalStorage(criminalData) {
+    var criminalRecord = { name: "DEV", faceId: "123", email: 'c@c.com' };
+    //obj = JSON.parse(text);
+    localStorage.removeItem(criminalRecord.faceId);
+}
