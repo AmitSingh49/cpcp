@@ -30,6 +30,7 @@ $(document).ready(function(){
 	});
 	
 	$('.reg-register-btn').click(function(){
+		$(this).attr('disabled', 'true');
 		if(!$('#reg-name').val()){
 			$('#reg-name').parent().addClass('error');
 		}else{
@@ -94,28 +95,34 @@ $(document).ready(function(){
 				if (err){
 					$('.home-camera-overlay').fadeOut();
 					$('.home-login-error').text(err.message).fadeIn();
+					$(this).attr('disabled', 'false');
 				} 
 				else if (data.FaceDetails.length > 1){
 					$('.home-camera-overlay').fadeOut();
 					$('.home-login-error').text("Please try with only one person in front of camera").fadeIn();
+					$(this).attr('disabled', 'false');
 				}
 				else{
 					rekognition.searchFacesByImage(CollectionParams, function (err, dataLogin) {
 						if (err){
 							console.log(err, err.stack);
-							$('.home-login-error').text(err.message).fadeIn();	
+							$('.home-login-error').text(err.message).fadeIn();
+							$(this).attr('disabled', 'false');
 						} 
 						else{
 							if(dataLogin.FaceMatches.length > 0){
 								$('.home-login-error').text("You are already registered").fadeIn();
+								$(this).attr('disabled', 'false');
 							}
 							else{
 								rekognition.indexFaces(params, function (err, data) {
 									if (err){
 										$('.home-login-error').text(err.message).removeClass('success').fadeIn();
+										$(this).attr('disabled', 'false');
 									} 
 									else{
 										$('.home-login-error').text('User Registered Successfully').addClass('success').fadeIn();
+										$(this).attr('disabled', 'false');
 										$('.reg-register-btn').fadeOut();
 									}
 								});	

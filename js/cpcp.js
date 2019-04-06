@@ -55,7 +55,6 @@ $(document).ready(function(){
 			rekognition.detectFaces(noOfHumansParams, function (err, data) {
 				if (err){
 					$('.home-camera-overlay').fadeOut();
-					
 					$('.home-login-error').text(err.message).fadeIn();
 				} 
 				else if (data.FaceDetails.length > 1){
@@ -70,7 +69,7 @@ $(document).ready(function(){
 						} 
 						else{
 							if(dataLogin.FaceMatches.length === 1){
-								window.location.href = 'C:/Users/vijay/Desktop/CPCP/cpcp_landing.html';
+								window.location.href = 'C:/Users/vijay/Desktop/New folder/cpcp/cpcp_landing.html';
 							}
 							else{
 								$('.home-camera-overlay').fadeOut();
