@@ -74,6 +74,13 @@ function AddToLocalStorage(criminalData) {
 }
 
 //change to match
+function GetFromLocalStorage(faceId) {
+    //var criminalRecord = { name: "DEV", faceId: "123", email: 'c@c.com' };
+    //obj = JSON.parse(text);
+     return localStorage.getItem(keyName);
+}
+
+//change to match
 function DeleteToLocalStorage(criminalData) {
     var criminalRecord = { name: "DEV", faceId: "123", email: 'c@c.com' };
     //obj = JSON.parse(text);
