@@ -40,7 +40,7 @@ $(document).ready(function(){
 	});
 	
 	function registerUser(data_uri){
-		debugger;
+	
 		var image = null;
 		var jpg = true;
 		try {

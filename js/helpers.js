@@ -105,5 +105,7 @@ function CreateCollection() {
          StatusCode: 200
         }
         */
+		//dataSearch.FaceMatches[0].Face.FaceId --- when found
+		//dataAddToDB.FaceRecords[0].Face.FaceId --- when added new
     });
 }
