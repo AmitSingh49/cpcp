@@ -1,0 +1,48 @@
+{
+    "FaceRecords": [ 
+       { 
+            "Name": "Malik",
+            "Cases": 3,
+            "Description": "This man was convicted for robbery",
+             "FaceId": "yyddd-usausais-asass-ddd",
+             "ImageId": "BM.jpg",
+             "Ïd": 1,
+          "FaceDetail": { 
+             "AgeRange": { 
+                "High": 23,
+                "Low": 46
+             },
+             "Beard": { 
+                "Value": true
+             },
+             "Emotions": [ 
+                { 
+                   "Type": "sad"
+                }
+             ],
+             "Eyeglasses": { 
+                
+                "Value": false
+             },
+             "EyesOpen": { 
+                "Value": true
+             },
+             "Gender": { 
+                "Value": "Male"
+             },
+             "MouthOpen": { 
+                "Value": false
+             },
+             "Mustache": { 
+                "Value": true
+             },
+             "Smile": { 
+                "Value": false
+             },
+             "Sunglasses": { 
+                "Value": true
+             }
+          }
+       }
+    ]
+ }
