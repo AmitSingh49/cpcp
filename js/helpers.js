@@ -86,3 +86,24 @@ function DeleteToLocalStorage(criminalData) {
     //obj = JSON.parse(text);
     localStorage.removeItem(criminalRecord.faceId);
 }
+
+
+//Create a new collection
+function CreateCollection() {
+    AnonLog();
+    AWS.region = "us-east-1";
+    var rekognition = new AWS.Rekognition();
+    var params = {
+        CollectionId: "test_police"
+    };
+    rekognition.createCollection(params, function (err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else console.log(data);           // successful response
+        /*
+        data = {
+         CollectionArn: "aws:rekognition:us-west-2:123456789012:collection/myphotos",
+         StatusCode: 200
+        }
+        */
+    });
+}
